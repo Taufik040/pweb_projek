@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     class="form-control" required>
             </div>
             <button type="submit" class="btn btn-success">Update</button>
-            <a href="user-login.php" class="btn btn-secondary">Batal</a>
+            <a href="admin_data.php" class="btn btn-secondary">Batal</a>
         </form>
     </div>
 </body>
