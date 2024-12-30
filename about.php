@@ -112,14 +112,16 @@ session_start();
 
     <main>
         <div class="content-section">
-            <h2>Universitas Teknologi Yogyakarta</h2>
-            <p>Universitas Teknologi Yogyakarta atau biasa disingkat UTY adalah salah satu perguruan tinggi swasta
-                terbaik di Provinsi Daerah Istimewa Yogyakarta (DIY). Universitas ini diselenggarakan oleh Yayasan
-                "Dharma Bhakti IPTEK".</p>
+            <h2>Sistem Informasi dan Layanan Administrasi Desa RT 02</h2>
+            <p>Kami hadir untuk mempermudah penyebaran informasi dan pengajuan surat di lingkungan Desa Karanggeneng RT
+                02 RW 01, Kelurahan Tlogorejo, Temanggung. Sistem ini dirancang sebagai solusi digital untuk memberikan
+                layanan yang cepat dan efisien
+                bagi
+                seluruh warga. Beberapa fitur utamanya: </p>
             <ul>
-                <li>Sekolah Tinggi Ilmu Ekonomi Yogyakarta (STIEYO)</li>
-                <li>Akademi Bahasa Asing Yogyakarta (ABAYO)</li>
-                <li>Sekolah Tinggi Manajemen Informatika dan Komputer (STMIK) Dharma Bangsa</li>
+                <li>Sistem Informasi</li>
+                <li>Informasi Surat</li>
+                <li>Pengajuan Surat</li>
             </ul>
         </div>
 
