@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "koneksi.php";
 
 // Pastikan pengguna telah login
 if (!isset($_SESSION["id_pengguna"])) {
@@ -9,12 +10,6 @@ if (!isset($_SESSION["id_pengguna"])) {
         window.location.href = 'login.php'; // Redirect ke halaman login
     </script>";
     exit();
-}
-
-// Koneksi ke database
-$koneksi = new mysqli("localhost", "root", "", "pweb_projek"); // Ganti "nama_database" sesuai database Anda
-if ($koneksi->connect_error) {
-    die("Koneksi gagal: " . $koneksi->connect_error);
 }
 
 $id_pengguna = $_SESSION["id_pengguna"];
@@ -64,105 +59,105 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" type="text/css" href="style-jenis.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-        }
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+    }
 
-        body {
-            display: flex;
-            flex-direction: column;
-        }
+    body {
+        display: flex;
+        flex-direction: column;
+    }
 
-        main {
-            flex: 1;
-        }
+    main {
+        flex: 1;
+    }
 
+    .form-container {
+        max-width: 400px;
+        width: 100%;
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        margin: 20px auto;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .form-container h2 {
+        text-align: center;
+        font-size: 26px;
+        color: #444;
+        margin-bottom: 25px;
+    }
+
+    .form-container label {
+        font-size: 14px;
+        color: #555;
+        font-weight: 500;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .form-container input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        font-size: 14px;
+        color: #333;
+        background: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-container input:focus {
+        border-color: #6a11cb;
+        box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+        outline: none;
+    }
+
+    .form-container .password-group {
+        position: relative;
+    }
+
+    .form-container .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 35%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 18px;
+        color: #888;
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        color: #fff;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .form-container button:hover {
+        background: linear-gradient(to right, #5a0dbc, #1d68f0);
+        transform: translateY(-3px);
+    }
+
+    .form-container button:active {
+        background: linear-gradient(to right, #4909a0, #175bc5);
+    }
+
+    @media (max-width: 768px) {
         .form-container {
-            max-width: 400px;
-            width: 100%;
-            background: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            margin: 20px auto;
-            font-family: 'Poppins', sans-serif;
+            padding: 20px;
         }
-
-        .form-container h2 {
-            text-align: center;
-            font-size: 26px;
-            color: #444;
-            margin-bottom: 25px;
-        }
-
-        .form-container label {
-            font-size: 14px;
-            color: #555;
-            font-weight: 500;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .form-container input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            font-size: 14px;
-            color: #333;
-            background: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .form-container input:focus {
-            border-color: #6a11cb;
-            box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
-            outline: none;
-        }
-
-        .form-container .password-group {
-            position: relative;
-        }
-
-        .form-container .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 35%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            font-size: 18px;
-            color: #888;
-        }
-
-        .form-container button {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            color: #fff;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        .form-container button:hover {
-            background: linear-gradient(to right, #5a0dbc, #1d68f0);
-            transform: translateY(-3px);
-        }
-
-        .form-container button:active {
-            background: linear-gradient(to right, #4909a0, #175bc5);
-        }
-
-        @media (max-width: 768px) {
-            .form-container {
-                padding: 20px;
-            }
-        }
+    }
     </style>
 </head>
 
@@ -188,26 +183,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </nav>
             <div class="user-menu">
                 <?php if (isset($_SESSION["nama_pengguna"])): ?>
-                    <img src="image/user.png" class="user-pic" onclick="toggleMenu()">
-                    <div class="sub-menu-wrap" id="subMenu">
-                        <div class="sub-menu">
-                            <div class="user-info">
-                                <img src="image/user.png">
-                                <h2><?php echo $_SESSION["nama_pengguna"]; ?></h2>
-                            </div>
-                            <hr>
-                            <a href="edit-profile.php" class="sub-menu-link">
-                                <img src="image/profile.png">
-                                <p>Edit Profile</p>
-                            </a>
-                            <a href="log-out.php" class="sub-menu-link">
-                                <img src="image/logout.png">
-                                <p>Logout</p>
-                            </a>
+                <img src="image/user.png" class="user-pic" onclick="toggleMenu()">
+                <div class="sub-menu-wrap" id="subMenu">
+                    <div class="sub-menu">
+                        <div class="user-info">
+                            <img src="image/user.png">
+                            <h2><?php echo $_SESSION["nama_pengguna"]; ?></h2>
                         </div>
+                        <hr>
+                        <a href="edit-profile.php" class="sub-menu-link">
+                            <img src="image/profile.png">
+                            <p>Edit Profile</p>
+                        </a>
+                        <a href="log-out.php" class="sub-menu-link">
+                            <img src="image/logout.png">
+                            <p>Logout</p>
+                        </a>
                     </div>
+                </div>
                 <?php else: ?>
-                    <a href="login.php" class="login-btn">Login</a>
+                <a href="login.php" class="login-btn">Login</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -236,24 +231,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </main>
     <script>
-        let subMenu = document.getElementById("subMenu");
+    let subMenu = document.getElementById("subMenu");
 
-        function toggleMenu() {
-            subMenu.classList.toggle("open-menu");
+    function toggleMenu() {
+        subMenu.classList.toggle("open-menu");
+    }
+    const togglePassword = () => {
+        const passwordField = document.getElementById('password_pengguna');
+        const icon = document.querySelector('.toggle-password');
+        const type = passwordField.type === 'password' ? 'text' : 'password';
+        passwordField.type = type;
+        if (type === 'password') {
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
         }
-        const togglePassword = () => {
-            const passwordField = document.getElementById('password_pengguna');
-            const icon = document.querySelector('.toggle-password');
-            const type = passwordField.type === 'password' ? 'text' : 'password';
-            passwordField.type = type;
-            if (type === 'password') {
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            } else {
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            }
-        };
+    };
     </script>
 </body>
 <footer>
