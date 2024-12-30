@@ -9,11 +9,6 @@ if (!isset($_SESSION["id_admin"])) {
     exit();
 }
 
-$koneksi = new mysqli("localhost", "root", "", "pweb_projek");
-if ($koneksi->connect_error) {
-    die("Koneksi gagal: " . $koneksi->connect_error);
-}
-
 $id_admin = $_SESSION["id_admin"];
 
 $sql = "SELECT nama_admin FROM admin_data WHERE id_admin = ?";
