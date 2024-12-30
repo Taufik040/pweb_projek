@@ -12,16 +12,16 @@ if (!isset($_SESSION["id_pengguna"])) {
 }
 
 // Koneksi ke database
-$conn = new mysqli("localhost", "root", "", "pweb_projek"); // Ganti "nama_database" sesuai database Anda
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+$koneksi = new mysqli("localhost", "root", "", "pweb_projek"); // Ganti "nama_database" sesuai database Anda
+if ($koneksi->connect_error) {
+    die("Koneksi gagal: " . $koneksi->connect_error);
 }
 
 $id_pengguna = $_SESSION["id_pengguna"];
 
 // Ambil data pengguna saat ini
 $sql = "SELECT nama_pengguna, email_pengguna FROM pengguna WHERE id_pengguna = ?";
-$stmt = $conn->prepare($sql);
+$stmt = $koneksi->prepare($sql);
 $stmt->bind_param("i", $id_pengguna);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -36,11 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($password_pengguna)) {
         $password_hash = password_hash($password_pengguna, PASSWORD_DEFAULT);
         $sql = "UPDATE pengguna SET nama_pengguna = ?, email_pengguna = ?, password_pengguna = ? WHERE id_pengguna = ?";
-        $stmt = $conn->prepare($sql);
+        $stmt = $koneksi->prepare($sql);
         $stmt->bind_param("sssi", $nama_pengguna, $email_pengguna, $password_hash, $id_pengguna);
     } else {
         $sql = "UPDATE pengguna SET nama_pengguna = ?, email_pengguna = ? WHERE id_pengguna = ?";
-        $stmt = $conn->prepare($sql);
+        $stmt = $koneksi->prepare($sql);
         $stmt->bind_param("ssi", $nama_pengguna, $email_pengguna, $id_pengguna);
     }
 
@@ -237,6 +237,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </main>
     <script>
         let subMenu = document.getElementById("subMenu");
+
         function toggleMenu() {
             subMenu.classList.toggle("open-menu");
         }

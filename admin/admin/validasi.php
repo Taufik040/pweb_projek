@@ -4,10 +4,10 @@ $user = "root";
 $pass = "";
 $db_name = "pweb_projek";
 
-$conn = new mysqli($host, $user, $pass, $db_name);
+$koneksi = new mysqli($host, $user, $pass, $db_name);
 
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+if ($koneksi->connect_error) {
+    die("Koneksi gagal: " . $koneksi->connect_error);
 }
 
 if (empty($_POST["nama_admin"]) || empty($_POST["password_admin"])) {
@@ -22,7 +22,7 @@ $password = trim($_POST["password_admin"]);
 // die;
 
 $sql_check = "SELECT * FROM admin_data WHERE nama_admin = ?";
-$stmt_check = $conn->prepare($sql_check);
+$stmt_check = $koneksi->prepare($sql_check);
 $stmt_check->bind_param("s", $nama_admin);
 $stmt_check->execute();
 $result = $stmt_check->get_result();
@@ -44,5 +44,4 @@ if ($result->num_rows > 0) {
 }
 
 $stmt_check->close();
-$conn->close();
-?>
+$koneksi->close();

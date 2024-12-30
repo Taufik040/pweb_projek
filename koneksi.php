@@ -13,7 +13,7 @@ if (file_exists('.env')) {
 }
 
 
-$conn = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
+$koneksi = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
 
 if (!$koneksi) {
     die("Koneksi gagal: " . mysqli_connect_error());

@@ -133,7 +133,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <select name="id_jenis_surat" id="id_jenis_surat" class="form-control" required>
                             <option value="" disabled selected>Pilih Jenis Surat</option>
                             <?php while ($row = $result_jenis_surat->fetch_assoc()): ?>
-                                <option value="<?= $row['id_jenis_surat']; ?>" <?= ($_GET['jenis'] == $row['nama_jenis_surat']) ? "selected" : "" ?>>
+                                <option value="<?= $row['id_jenis_surat']; ?>"
+                                    <?= ($_GET['jenis'] == $row['nama_jenis_surat']) ? "selected" : "" ?>>
                                     <?= htmlspecialchars($row['nama_jenis_surat']); ?>
                                 </option>
                             <?php endwhile; ?>

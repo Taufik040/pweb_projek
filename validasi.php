@@ -1,13 +1,22 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db_name = "pweb_projek";
+if (file_exists('.env')) {
+    $env = parse_ini_file('.env');
+    $dbHost = $env["DB_HOST"];
+    $dbUsername = $env["DB_USERNAME"];
+    $dbPassword = $env["DB_PASSWORD"];
+    $dbName = $env["DB_NAME"];
+} else {
+    $dbHost = getenv("DB_HOST");
+    $dbUsername = getenv("DB_USERNAME");
+    $dbPassword = getenv("DB_PASSWORD");
+    $dbName = getenv("DB_NAME");
+}
 
-$conn = new mysqli($host, $user, $pass, $db_name);
 
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+$koneksi = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
+
+if ($koneksi->connect_error) {
+    die("Koneksi gagal: " . $koneksi->connect_error);
 }
 
 if (empty($_POST["nama_pengguna"]) || empty($_POST["password_pengguna"])) {
@@ -18,7 +27,7 @@ $nama_pengguna = trim($_POST["nama_pengguna"]);
 $password = trim($_POST["password_pengguna"]);
 
 $sql_check = "SELECT * FROM pengguna WHERE nama_pengguna = ?";
-$stmt_check = $conn->prepare($sql_check);
+$stmt_check = $koneksi->prepare($sql_check);
 $stmt_check->bind_param("s", $nama_pengguna);
 $stmt_check->execute();
 $result = $stmt_check->get_result();
@@ -39,5 +48,4 @@ if ($result->num_rows > 0) {
 
 // Menutup koneksi
 $stmt_check->close();
-$conn->close();
-?>
+$koneksi->close();

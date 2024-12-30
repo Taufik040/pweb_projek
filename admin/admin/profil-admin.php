@@ -9,15 +9,15 @@ if (!isset($_SESSION["id_admin"])) {
     exit();
 }
 
-$conn = new mysqli("localhost", "root", "", "pweb_projek");
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+$koneksi = new mysqli("localhost", "root", "", "pweb_projek");
+if ($koneksi->connect_error) {
+    die("Koneksi gagal: " . $koneksi->connect_error);
 }
 
 $id_admin = $_SESSION["id_admin"];
 
 $sql = "SELECT nama_admin FROM admin_data WHERE id_admin = ?";
-$stmt = $conn->prepare($sql);
+$stmt = $koneksi->prepare($sql);
 $stmt->bind_param("i", $id_admin);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!empty($nama_admin)) {
         $query = "UPDATE admin_data SET nama_admin = ? WHERE id_admin = ?";
-        $stmt = $conn->prepare($query);
+        $stmt = $koneksi->prepare($query);
         $stmt->bind_param("si", $nama_admin, $id_admin);
         if (!$stmt->execute()) {
             $success = false;
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($password_admin)) {
         $hashed_password = password_hash($password_admin, PASSWORD_BCRYPT);
         $query = "UPDATE admin_data SET password_admin = ? WHERE id_admin = ?";
-        $stmt = $conn->prepare($query);
+        $stmt = $koneksi->prepare($query);
         $stmt->bind_param("si", $hashed_password, $id_admin);
         if (!$stmt->execute()) {
             $success = false;

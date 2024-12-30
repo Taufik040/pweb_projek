@@ -1,13 +1,22 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db_name = "pweb_projek";
+if (file_exists('.env')) {
+    $env = parse_ini_file('.env');
+    $dbHost = $env["DB_HOST"];
+    $dbUsername = $env["DB_USERNAME"];
+    $dbPassword = $env["DB_PASSWORD"];
+    $dbName = $env["DB_NAME"];
+} else {
+    $dbHost = getenv("DB_HOST");
+    $dbUsername = getenv("DB_USERNAME");
+    $dbPassword = getenv("DB_PASSWORD");
+    $dbName = getenv("DB_NAME");
+}
 
-$conn = new mysqli($host, $user, $pass, $db_name);
 
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+$koneksi = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
+
+if ($koneksi->connect_error) {
+    die("Koneksi gagal: " . $koneksi->connect_error);
 }
 
 if (empty($_POST["nama_pengguna"]) || empty($_POST["password_pengguna"]) || empty($_POST["email_pengguna"])) {
@@ -29,7 +38,7 @@ if (strlen($password) < 8) {
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 $sql_check = "SELECT * FROM pengguna WHERE nama_pengguna = ? OR email_pengguna = ?";
-$stmt_check = $conn->prepare($sql_check);
+$stmt_check = $koneksi->prepare($sql_check);
 $stmt_check->bind_param("ss", $nama_pengguna, $email_pengguna);
 $stmt_check->execute();
 $result = $stmt_check->get_result();
@@ -38,7 +47,7 @@ if ($result->num_rows > 0) {
     echo "<script>alert('Nama Pengguna atau Email sudah digunakan. Silakan pilih yang lain.'); window.location.href = 'register.php';</script>";
 } else {
     $sql_insert = "INSERT INTO pengguna (nama_pengguna, password_pengguna, email_pengguna) VALUES (?, ?, ?)";
-    $stmt_insert = $conn->prepare($sql_insert);
+    $stmt_insert = $koneksi->prepare($sql_insert);
     $stmt_insert->bind_param("sss", $nama_pengguna, $hashed_password, $email_pengguna);
 
     if ($stmt_insert->execute()) {
@@ -50,5 +59,4 @@ if ($result->num_rows > 0) {
 
 $stmt_check->close();
 $stmt_insert->close();
-$conn->close();
-?>
+$koneksi->close();
