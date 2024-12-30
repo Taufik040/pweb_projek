@@ -113,9 +113,9 @@ session_start();
     <main>
         <div class="content-section">
             <h2>Universitas Teknologi Yogyakarta</h2>
-            <p>Kami hadir untuk mempermudah pengelolaan administrasi dan informasi di lingkungan Desa RT 02. Sistem ini
-                dirancang sebagai solusi digital untuk memberikan layanan yang cepat, transparan, dan efisien bagi
-                seluruh warga.</p>
+            <p>Universitas Teknologi Yogyakarta atau biasa disingkat UTY adalah salah satu perguruan tinggi swasta
+                terbaik di Provinsi Daerah Istimewa Yogyakarta (DIY). Universitas ini diselenggarakan oleh Yayasan
+                "Dharma Bhakti IPTEK".</p>
             <ul>
                 <li>Sekolah Tinggi Ilmu Ekonomi Yogyakarta (STIEYO)</li>
                 <li>Akademi Bahasa Asing Yogyakarta (ABAYO)</li>
@@ -125,7 +125,7 @@ session_start();
 
         <div class="content-section photo">
             <h3>Struktur Organisasi RT 02</h3>
-            <img src="image/z.jpg" alt="Foto Struktur">
+            <img src="image/struk.jpg" alt="Foto Struktur">
         </div>
 
         <div class="content-section map">
@@ -136,7 +136,7 @@ session_start();
 
         <div class="content-section photo">
             <h3>Foto Dokumentasi</h3>
-            <img src="image/z.jpg" alt="Foto Struktur">
+            <img src="image/doku.jpg" alt="Foto Struktur">
         </div>
     </main>
 
