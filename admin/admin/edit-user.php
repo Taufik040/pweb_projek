@@ -31,27 +31,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Pengguna</title>
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <h2 class="mt-4">Edit Pengguna</h2>
         <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label>Nama Pengguna</label>
-                <input type="text" name="nama_pengguna" value="<?php echo htmlspecialchars($row['nama_pengguna']); ?>" class="form-control" required>
+                <input type="text" name="nama_pengguna" value="<?php echo htmlspecialchars($row['nama_pengguna']); ?>"
+                    class="form-control" required>
             </div>
             <div class="form-group">
                 <label>Email Pengguna</label>
-                <input type="email" name="email_pengguna" value="<?php echo htmlspecialchars($row['email_pengguna']); ?>" class="form-control" required>
+                <input type="email" name="email_pengguna"
+                    value="<?php echo htmlspecialchars($row['email_pengguna']); ?>" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-success">Update</button>
-            <a href="pengguna.php" class="btn btn-secondary">Batal</a>
+            <a href="admin_data.php" class="btn btn-secondary">Batal</a>
         </form>
     </div>
 </body>
+
 </html>
