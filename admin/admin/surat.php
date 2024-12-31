@@ -230,7 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $result = $koneksi->query($q);
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
-                                                ?>
+                                        ?>
                                                 <tr>
                                                     <td><?= $row['id_surat'] ?></td>
                                                     <td><?= $row['nama_jenis_surat'] ?></td>
@@ -252,7 +252,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     </td>
                                                     <td>
                                                         <?php if ($row['file_surat'] !== null): ?>
-                                                            <a href="/<?php echo $base_url ?>/uploads/<?= htmlspecialchars($row['file_surat']); ?>"
+                                                            <a href="/uploads/<?= htmlspecialchars($row['file_surat']); ?>"
                                                                 target="_blank" data-toggle="tooltip"
                                                                 title="Klik untuk melihat file">
                                                                 <i class="fas fa-file"></i> Lihat File
@@ -268,7 +268,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                             class="btn btn-danger btn-sm">Delete</a>
                                                     </td>
                                                 </tr>
-                                                <?php
+                                        <?php
                                             }
                                         } else {
                                             echo "<tr><td colspan='7' class='text-center'>Tidak ada data</td></tr>";
@@ -313,7 +313,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#dataTable').DataTable({
                 "pageLength": 10, // Jumlah default entri per halaman
                 "lengthMenu": [5, 10, 25, 50, 100], // Opsi jumlah entri
